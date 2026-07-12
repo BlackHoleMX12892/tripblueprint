@@ -4,20 +4,70 @@ import SwiftUI
 
 @main
 struct tripblueprint: App {
+    #if os(macOS)
     init() {
         NSApplication.shared.setActivationPolicy(.regular)
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
+    #endif
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+        
+        #if os(macOS)
+        Settings {
+            SettingsView()
+        }
+        #endif
+    }
+}
+
+struct SettingsView: View {
+    var body: some View {
+        TabView {
+            Tab("General", systemImage: "gear") {
+                Text("Hi there general")
+            }
+            Tab("Advanced", systemImage: "star") {
+                Text("Hi there advanced")
+            }
+        }
+        .scenePadding()
+        .frame(maxWidth: 350, minHeight: 100)
     }
 }
 
 struct ContentView : View {
+    struct Menu: Identifiable, Hashable {
+        let name: String
+        let icon: String
+        let id: UUID = UUID()
+    }
+
+    private var menus: [ContentView.Menu] = [
+        Menu(name: "Overview", icon: "pencil.and.list.clipboard"),
+        Menu(name: "Places", icon: "map"),
+        Menu(name: "Flights", icon: "airplane.up.right")
+    ]
+
+    @State private var selectedMenuID: UUID? = nil
+
+    init() {
+        _selectedMenuID = State(initialValue: menus[0].id)
+    }
+
     var body: some View {
-        Text("Hello SwiftUI")
+        NavigationSplitView {
+            List(menus, selection: $selectedMenuID) { item in
+                HStack {
+                    Image(systemName: item.icon).resizable().aspectRatio(contentMode: .fit).frame(width: 25, height: 25)
+                    Text(item.name)
+                }.padding([.bottom, .top], 5).padding(.leading, 5)
+            }
+        } detail: {
+        
+        }
     }
 }
