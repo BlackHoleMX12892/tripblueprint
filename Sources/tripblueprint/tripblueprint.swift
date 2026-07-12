@@ -12,7 +12,7 @@ struct tripblueprint: App {
     #endif
 
     var body: some Scene {
-        WindowGroup {
+        WindowGroup("Trip Blueprint") {
             ContentView()
         }
         
@@ -49,7 +49,8 @@ struct ContentView : View {
     private var menus: [ContentView.Menu] = [
         Menu(name: "Overview", icon: "pencil.and.list.clipboard"),
         Menu(name: "Places", icon: "map"),
-        Menu(name: "Flights", icon: "airplane.up.right")
+        Menu(name: "Flights", icon: "airplane.up.right"),
+        Menu(name: "Transport", icon: "bus.doubledecker")
     ]
 
     @State private var selectedMenuID: UUID? = nil
@@ -64,7 +65,7 @@ struct ContentView : View {
                 HStack {
                     Image(systemName: item.icon).resizable().aspectRatio(contentMode: .fit).frame(width: 25, height: 25)
                     Text(item.name)
-                }.padding([.bottom, .top], 5).padding(.leading, 5)
+                }.padding([.bottom, .top], 5).padding(.leading, 2)
             }
         } detail: {
         
