@@ -62,7 +62,14 @@ struct ContentView: View {
 
     struct Overview: View {
         var body: some View {
-            Text("Overview")
+            ScrollView {
+                VStack {
+                    RoundedRectangle(cornerRadius: 10).frame(height: 250).padding(10)
+                    HStack {
+
+                    }
+                }
+            }
         }
     }
 
