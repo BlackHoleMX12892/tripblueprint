@@ -1,6 +1,7 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 import SwiftUI
+import MapKit
 
 @main
 struct tripblueprint: App {
@@ -61,13 +62,15 @@ struct ContentView: View {
 
     struct Overview: View {
         var body: some View {
-            Text("Hello, World!")
+            Text("Overview")
         }
     }
 
     struct Places: View {
         var body: some View {
-            Text("Places are everywhere, because every place is a place")
+            Map {
+
+            }
         }
     }
 
