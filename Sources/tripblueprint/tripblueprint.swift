@@ -64,11 +64,21 @@ struct ContentView: View {
         var body: some View {
             ScrollView {
                 VStack {
-                    RoundedRectangle(cornerRadius: 10).frame(height: 250).padding(10)
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20).fill(.blue.gradient)
+                        Text("Hi there").foregroundColor(Color.red).font(.largeTitle)
+                    }.frame(height: 250)
                     HStack {
+                        ZStack {
+                            Map {
 
-                    }
-                }
+                            }.clipShape(.rect(cornerRadius: 20))
+                        }
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                        }
+                    }.frame(height: 400)
+                }.padding([.horizontal, .bottom], 20)
             }
         }
     }
@@ -122,7 +132,7 @@ struct ContentView: View {
                     Transport()
                 default:
                     Overview()
-            } // this should not be like this, but how am I supposed to provide a default UUID?
+            }
         }
     }
 }
