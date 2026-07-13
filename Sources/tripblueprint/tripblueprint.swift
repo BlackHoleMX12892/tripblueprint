@@ -39,7 +39,7 @@ struct SettingsView: View {
     }
 }
 
-struct ContentView : View {
+struct ContentView: View {
     struct Menu: Identifiable, Hashable {
         let name: String
         let icon: String
@@ -59,6 +59,39 @@ struct ContentView : View {
         _selectedMenuID = State(initialValue: menus[0].id)
     }
 
+    struct Overview: View {
+        var body: some View {
+            Text("Hello, World!")
+        }
+    }
+
+    struct Places: View {
+        var body: some View {
+            Text("Places are everywhere, because every place is a place")
+        }
+    }
+
+    struct Flights: View {
+        var body: some View {
+            Text("We have dreamed to fly since the first moments as humans")
+        }
+    }
+
+    struct Transport: View {
+        var body: some View {
+            Text("Transportation exists because the world is physical")
+        }
+    }
+
+    func getCurrentName(currentUUID: UUID) -> String {
+        for item in menus {
+            if item.id == currentUUID {
+                return item.name
+            }
+        }
+        return ""
+    }
+
     var body: some View {
         NavigationSplitView {
             List(menus, selection: $selectedMenuID) { item in
@@ -68,7 +101,18 @@ struct ContentView : View {
                 }.padding([.bottom, .top], 5).padding(.leading, 2)
             }
         } detail: {
-        
+            switch getCurrentName(currentUUID: selectedMenuID!) {
+                case "Overview":
+                    Overview()
+                case "Places":
+                    Places()
+                case "Flights":
+                    Flights()
+                case "Transport":
+                    Transport()
+                default:
+                    Overview()
+            } // this should not be like this, but how am I supposed to provide a default UUID?
         }
     }
 }
