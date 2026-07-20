@@ -99,7 +99,18 @@ struct ContentView: View {
 
     struct Flights: View {
         var body: some View {
-            Text("We have dreamed to fly since the first moments as humans")
+            TabView {
+                Tab("Manage", systemImage: "airplane.ticket") {
+                    ScrollView {
+                        Text("Manage")
+                    }
+                }
+                Tab("Book", systemImage: "pencil.and.list.clipboard") {
+                    ScrollView {
+                        Text("Book")
+                    }
+                }
+            }
         }
     }
 
