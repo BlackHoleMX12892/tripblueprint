@@ -87,12 +87,12 @@ struct ContentView: View {
         var body: some View {
             ZStack(alignment: .bottomTrailing) {
                 Map {
-
+                    Marker("Truth BBQ", coordinate: CLLocationCoordinate2D(latitude: 29.7690978, longitude: -95.3976466)).tint(.orange)
                 }
                 ZStack {
                     Circle().fill(Color.white)
-                    Image(systemName: "plus").foregroundColor(Color.black)
-                }.frame(width: 40, height: 40).padding(.bottom, 55).padding(.trailing, 10)
+                    Image(systemName: "plus").foregroundColor(Color.black).font(.title2)
+                }.frame(width: 35, height: 35).padding(.bottom, 55).padding(.trailing, 10)
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
