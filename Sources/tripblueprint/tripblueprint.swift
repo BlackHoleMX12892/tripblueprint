@@ -106,19 +106,21 @@ struct ContentView: View {
     }
 
     struct Places: View {
-        func run() -> Void {
-            print("Hello, World!")
+        @State private var isShowingPlaceAdditionPopover = false
+
+        func ShowPlaceAdditionPopover() -> Void {
+            self.isShowingPlaceAdditionPopover = true
         }
 
         var body: some View {
             ZStack(alignment: .bottomTrailing) {
                 PlacesMap()
-                Button(action: run) {
+                Button(action: ShowPlaceAdditionPopover) {
                     ZStack {
                         Circle().fill(Color.white)
                         Image(systemName: "plus").foregroundColor(Color.black).font(.title2)
                     }
-                }.frame(width: 35, height: 35).padding(.bottom, 55).padding(.trailing, 10).buttonStyle(.plain)
+                }.frame(width: 35, height: 35).padding(.bottom, 55).padding(.trailing, 10).buttonStyle(.plain).popover(isPresented: $isShowingPlaceAdditionPopover, attachmentAnchor: .point(.leading), arrowEdge: .leading) {Text("Hi").padding()}
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
