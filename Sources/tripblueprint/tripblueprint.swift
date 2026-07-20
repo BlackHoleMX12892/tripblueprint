@@ -106,13 +106,19 @@ struct ContentView: View {
     }
 
     struct Places: View {
+        func run() -> Void {
+            print("Hello, World!")
+        }
+
         var body: some View {
             ZStack(alignment: .bottomTrailing) {
                 PlacesMap()
-                ZStack {
-                    Circle().fill(Color.white)
-                    Image(systemName: "plus").foregroundColor(Color.black).font(.title2)
-                }.frame(width: 35, height: 35).padding(.bottom, 55).padding(.trailing, 10)
+                Button(action: run) {
+                    ZStack {
+                        Circle().fill(Color.white)
+                        Image(systemName: "plus").foregroundColor(Color.black).font(.title2)
+                    }
+                }.frame(width: 35, height: 35).padding(.bottom, 55).padding(.trailing, 10).buttonStyle(.plain)
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
