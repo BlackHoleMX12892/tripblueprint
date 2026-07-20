@@ -66,7 +66,7 @@ struct ContentView: View {
                 VStack {
                     ZStack {
                         RoundedRectangle(cornerRadius: 20).fill(.blue.gradient)
-                        Text("Hi there").foregroundColor(Color.red).font(.largeTitle)
+                        Text("Suggested places").foregroundColor(Color.red).font(.largeTitle)
                     }.frame(height: 250)
                     HStack {
                         ZStack {
@@ -85,8 +85,14 @@ struct ContentView: View {
 
     struct Places: View {
         var body: some View {
-            Map {
+            ZStack {
+                Map {
 
+                }
+                ZStack {
+                    Circle().fill(Color.secondary)
+                    Image(systemName: "plus").foregroundColor(Color.black)
+                }
             }
         }
     }
