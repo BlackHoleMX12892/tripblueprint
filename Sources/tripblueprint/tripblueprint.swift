@@ -77,7 +77,7 @@ struct ContentView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 20)
                         }
-                    }.frame(height: 400)
+                    }.frame(height: 400).padding(.top, 10)
                 }.padding([.horizontal, .bottom], 20)
             }
         }
@@ -85,15 +85,15 @@ struct ContentView: View {
 
     struct Places: View {
         var body: some View {
-            ZStack {
+            ZStack(alignment: .bottomTrailing) {
                 Map {
 
                 }
                 ZStack {
-                    Circle().fill(Color.secondary)
+                    Circle().fill(Color.white)
                     Image(systemName: "plus").foregroundColor(Color.black)
-                }
-            }
+                }.frame(width: 40, height: 40).padding(.bottom, 55).padding(.trailing, 10)
+            }.frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 
