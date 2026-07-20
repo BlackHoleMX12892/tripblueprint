@@ -60,19 +60,41 @@ struct ContentView: View {
         _selectedMenuID = State(initialValue: menus[0].id)
     }
 
+    struct Place: Identifiable, Equatable {
+        let name: String
+        let latitude: Double
+        let longitude: Double
+        let color: Color
+        let id: UUID = UUID()
+    }
+
+    struct PlacesMap: View {
+        let storedplaces: [ContentView.Place] = [
+            Place(name: "TruthBBQ", latitude: 29.7690978, longitude: -95.3976466, color: .orange),
+            Place(name: "Pinkerton's Barbecue", latitude: 29.427150, longitude: -98.494151, color: .green),
+            Place(name: "Buc-ee's", latitude: 29.726440765116635, longitude: -98.07863723203057, color: .blue)
+        ]
+
+        var body: some View {
+            Map {
+                ForEach(storedplaces) { place in
+                    Marker(place.name, coordinate: CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)).tint(place.color)
+                }
+            }
+        }
+    }
+
     struct Overview: View {
         var body: some View {
             ScrollView {
                 VStack {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 20).fill(.blue.gradient)
+                        RoundedRectangle(cornerRadius: 10).fill(.blue.gradient)
                         Text("Suggested places").foregroundColor(Color.red).font(.largeTitle)
                     }.frame(height: 250)
                     HStack {
                         ZStack {
-                            Map {
-
-                            }.clipShape(.rect(cornerRadius: 20))
+                            PlacesMap().clipShape(.rect(cornerRadius: 20))
                         }
                         ZStack {
                             RoundedRectangle(cornerRadius: 20)
@@ -86,9 +108,7 @@ struct ContentView: View {
     struct Places: View {
         var body: some View {
             ZStack(alignment: .bottomTrailing) {
-                Map {
-                    Marker("Truth BBQ", coordinate: CLLocationCoordinate2D(latitude: 29.7690978, longitude: -95.3976466)).tint(.orange)
-                }
+                PlacesMap()
                 ZStack {
                     Circle().fill(Color.white)
                     Image(systemName: "plus").foregroundColor(Color.black).font(.title2)
