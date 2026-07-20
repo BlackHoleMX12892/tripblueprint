@@ -105,6 +105,16 @@ struct ContentView: View {
         }
     }
 
+    struct PlaceAdditionPopoverContent: View {
+        @State private var placename: String = ""
+        var body: some View {
+            VStack {
+                Text("Add new place:")
+                TextField("", text: $placename)
+            }
+        }
+    }
+
     struct Places: View {
         @State private var isShowingPlaceAdditionPopover = false
 
@@ -120,7 +130,7 @@ struct ContentView: View {
                         Circle().fill(Color.white)
                         Image(systemName: "plus").foregroundColor(Color.black).font(.title2)
                     }
-                }.frame(width: 35, height: 35).padding(.bottom, 55).padding(.trailing, 10).buttonStyle(.plain).popover(isPresented: $isShowingPlaceAdditionPopover, attachmentAnchor: .point(.leading), arrowEdge: .leading) {Text("Hi").padding()}
+                }.frame(width: 35, height: 35).padding(.bottom, 55).padding(.trailing, 10).buttonStyle(.plain).popover(isPresented: $isShowingPlaceAdditionPopover, attachmentAnchor: .point(.leading), arrowEdge: .leading) {PlaceAdditionPopoverContent().padding()}
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
