@@ -89,9 +89,20 @@ struct ContentView: View {
             ScrollView {
                 VStack {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 10).fill(.blue.gradient)
-                        Text("Suggested places").foregroundColor(Color.red).font(.largeTitle)
-                    }.frame(height: 250)
+                        Rectangle().fill(.clear).background(AsyncImage(url: URL(string: "https://images.pexels.com/photos/19936016/pexels-photo-19936016.jpeg")) { phase in
+                            switch phase {
+                            case .empty:
+                                EmptyView()
+                            case .failure:
+                                EmptyView()
+                            case .success(let image):
+                                image.resizable().scaledToFill()
+                            @unknown default:
+                                EmptyView()
+                            }
+                        })
+                        Text("Suggested places").foregroundColor(Color.white).font(.largeTitle).padding([.trailing, .leading], 5).background(.mint).cornerRadius(5)
+                    }.frame(height: 250).clipShape(.rect(cornerRadius: 10))
                     HStack {
                         ZStack {
                             PlacesMap().clipShape(.rect(cornerRadius: 20))
