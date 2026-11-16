@@ -106,6 +106,10 @@ struct ContentView: View {
                     HStack {
                         ZStack {
                             PlacesMap().clipShape(.rect(cornerRadius: 20))
+                            
+                            Button("", systemImage: "square.resize.up", action: {
+                                selectedMenuID = menus[1].id
+                            })
                         }
                         ZStack {
                             RoundedRectangle(cornerRadius: 20)
